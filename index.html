@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Based on 
+        https://codepen.io/gwillers/pen/XEKWBL?editors=1111 
+        https://codepen.io/michaelphipps/pen/vaaMLb
+    -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Soundboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/visualizer.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js" 
+        integrity="sha512-Siyxh4gyNM5SaERNa9BOZSPcu/auHyFUWn9OVFD7MxI3/dVPQklE7tfqS+pLmPHF1zo6UdDaJAp/thihrf0c7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.2.3/Tone.min.js"></script>
+</head>
+
+<body>
+    <div class="black">
+        <div id="audioContextSuspended"></div>
+        <canvas id="fft"></canvas>
+    </div>
+    <div class="flex">
+        <div class="centering">
+
+            <div class="headline">
+                <h1>CTF Soundboard</h1>
+                <p>Press the keys on your keyboard to play a sound.</p>
+            </div>
+
+            <div id="focus" class="keys">
+                <div data-key="65" class="key">
+                    <kbd>a</kbd>
+                    <span>Dominating!</span>
+                </div>
+                <div data-key="83" class="key">
+                    <kbd>s</kbd>
+                    <span>Hat-trick1</span>
+                </div>
+                <div data-key="68" class="key">
+                    <kbd>d</kbd>
+                    <span>Rampage1</span>
+                </div>
+                <div data-key="70" class="key">
+                    <kbd>f</kbd>
+                    <span>hat-trick2</span>
+                </div>
+                <div data-key="71" class="key">
+                    <kbd>g</kbd>
+                    <span>FirstBlood1</span>
+                </div>
+                <div data-key="72" class="key">
+                    <kbd>h</kbd>
+                    <span>FirstBlood2</span>
+                </div>
+                <div data-key="74" class="key">
+                    <kbd>j</kbd>
+                    <span>Rampage2</span>
+                </div>
+                <div data-key="75" class="key">
+                    <kbd>k</kbd>
+                    <span>Unstop1</span>
+                </div>
+                <div data-key="76" class="key">
+                    <kbd>l</kbd>
+                    <span>Unstop2</span>
+                </div>
+                <div data-key="186" class="key">
+                    <kbd>;</kbd>
+                    <span>WickedSick1</span>
+                </div>
+                <div data-key="222" class="key">
+                    <kbd>'</kbd>
+                    <span>WickedSick2</span>
+                </div>
+            </div>
+
+            <audio data-key="65" src="assets/1.wav"></audio>
+            <audio data-key="71" src="assets/2.wav"></audio>
+            <audio data-key="72" src="assets/3.wav"></audio>
+            <audio data-key="70" src="assets/4.wav"></audio>
+            <audio data-key="83" src="assets/5.wav"></audio>
+            <audio data-key="68" src="assets/6.wav"></audio>
+            <audio data-key="74" src="assets/7.wav"></audio>
+            <audio data-key="75" src="assets/8.wav"></audio>
+            <audio data-key="76" src="assets/9.wav"></audio>
+            <audio data-key="186" src="assets/10.wav"></audio>
+            <audio data-key="222" src="assets/11.wav"></audio>
+            <audio data-key="88" src="assets/wiydawdhd.mp3"></audio>
+            <audio data-key="90" src="assets/tng_chirp_clean.mp3"></audio>
+        </div>
+    </div>
+
+    <script src="js/visualizer.js" defer></script>
+    <script src="js/sounds.js" defer></script>
+</body>
+
+</html>
