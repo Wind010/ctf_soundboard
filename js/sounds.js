@@ -3,6 +3,8 @@ function removeTransition(e) {
     this.classList.remove('playing');
 }
 
+
+
 function playAudio(e) {
     let keyCode;
     
@@ -21,9 +23,15 @@ function playAudio(e) {
     const key = document.querySelector('.key[data-key="' + keyCode + '"]');
     if (!audio) return; // stop function if no audio
     audio.currentTime = 0;
-    
-    //visualize(audio)
-    audio.play();
+
+    var player = new Tone.Player({
+        url: audio.src,
+        autostart: true
+    }).toMaster();
+    player.autostart = true;
+
+    visualize(player);
+    //audio.play();
 
 
     if (!key) {

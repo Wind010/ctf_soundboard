@@ -1,4 +1,4 @@
-var playing = false;
+var playing = true;
 var resolution = 128;
 var progress = 0;
 
@@ -22,16 +22,9 @@ Tone.Buffer.on("progress", function(data) {
 });
 
 
-function visualize(audio) {
-    
-
-    // Connect AnalyserNode to the audio source
-    var source = audioContext.createMediaElementSource(audio);
-    source.connect(analyser);
-    analyser.connect(audioContext.destination);
-
-    playing = true;
-    drawLoop();
+function visualize(player) {
+  player.fan(fft, waveform);
+  drawLoop();
 }
 
 
@@ -85,17 +78,17 @@ function drawFrame(fftvalues, waveformvalues) {
         ctx.strokeStyle = "rgba(255,255,255,0.1)";
       }
   
-      ctx.lineCap = "round";
+      ctx.lineCap = "square";
       ctx.moveTo(startx, starty);
       ctx.lineTo(endx, endy);
       ctx.lineWidth = wendr;
-      ctx.shadowBlur = 20;
-      ctx.shadowColor = "white";
+      ctx.shadowBlur = 50;
+      ctx.shadowColor = "#1feb04";
       ctx.stroke();
     }
   }
 
-// size the canvases
+// Size the canvases
 var canvasWidth, canvasHeight;
 function sizeCanvases() {
   canvasWidth = $("#fft").width();
@@ -104,8 +97,8 @@ function sizeCanvases() {
   ctx.canvas.height = canvasHeight;
 }
 
-// start the draw loop
-// see http://codetheory.in/controlling-the-frame-rate-with-requestanimationframe/ for details on how this works.
+// Start the draw loop
+// See http://codetheory.in/controlling-the-frame-rate-with-requestanimationframe/ for details on how this works.
 var fps = 30;
 var now;
 var then = Date.now();
@@ -126,30 +119,13 @@ function drawLoop() {
 
     // Get the fft data and draw it
     if (playing) {
-    //   var fftValues = fft.getValue();
-    //   var waveformValues = waveform.getValue();
-
-        // Get FFT data
-        var fftValues = new Uint8Array(analyser.frequencyBinCount);
-        for (let i = 0; i < fftValues.length; i++) {
-            fftValues[i] = Math.floor(Math.random() * 256); // Generate a random integer between 0 and 255
-        }
-        //analyser.getByteFrequencyData(fftValues);
-
-        // Get waveform data
-        var waveformValues = new Uint8Array(analyser.frequencyBinCount);
-        for (let i = 0; i < waveformValues.length; i++) {
-            waveformValues[i] = Math.floor(Math.random() * 256); // Generate a random integer between 0 and 255
-        }
-        //analyser.getByteTimeDomainData(waveformValues);
+       var fftValues = fft.getValue();
+       var waveformValues = waveform.getValue();
 
         drawFrame(fftValues, waveformValues);
     }
-
   }
 }
-
-
 
 
 // Map function borrowed and mangled from P5
